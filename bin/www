@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+// run with 'npm start'
+
+var debug = require('debug')('Node-API-Testing');
+var app = require('../app');
+var DB = require('../services/dbTest').DBTest;
+var DAO = require('../services/dao').DAO;
+
+app.set('port', process.env.PORT || 3000);
+
+DAO.db = new DB();
+
+var server = app.listen(app.get('port'), function () {
+  let msg = 'Express server listening on port ' + server.address().port;
+  console.log(msg);
+  debug(msg);
+});
